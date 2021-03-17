@@ -9,4 +9,4 @@ Fill up the form at the beginning of the script with your User Info and the watc
 The gmail App password is not your gmail password, but is the app Password Google generates for you for a specific app.
 The script has a frequencyOfChecks variable that you can set, the default is 1, meaning it will run every 24 hrs. 
 It is recommend to run this on the cloud. If you are going to run it with a task scheduler, set the frequencyOfChecks to 0 as you
-will not need it, your task scheduler will handle when it runs.
+will not need it, your task scheduler will handle when it runs.  There is an if statement failsafe in place so if frequencyOfChecks is 0, there won't be an infinite loop.
