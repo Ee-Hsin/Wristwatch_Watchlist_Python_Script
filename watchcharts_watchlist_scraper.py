@@ -89,7 +89,14 @@ def searchForWatches():
     for watch in watches:
         scrapeWatchCharts(watch['watchName'],watch['minPrice'],watch['maxPrice'],watch['recentListingsLimit'])
 
-while(True):
+#Added failsafe in case frequency of checks is 0, in which case it will be an infinite loop with 0 breaks.
+if frequencyOfChecks != 0:
+    while(True):
+        searchForWatches()
+        #Added this so that there is, at minimum a 1 minute break between each run. Just as another failsafe
+        #in case the user accidentally uses too small a number for frequencyOfChecks
+        time.sleep(60*60)
+        #Checks once a frequencyOfChecks days
+        time.sleep(60*60*24*frequencyOfChecks)
+else:
     searchForWatches()
-    #Checks once a frequencyOfChecks days
-    time.sleep(60*60*24*frequencyOfChecks)
