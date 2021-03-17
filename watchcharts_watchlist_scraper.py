@@ -2,6 +2,7 @@ import os
 import requests
 from bs4 import BeautifulSoup
 import smtplib
+import time
 
 #USERS SHOULD FILL THIS PART UP!
 emailAddress = os.environ.get('emailAddress')
@@ -9,10 +10,11 @@ emailAddressRecipient = os.environ.get('emailAddress')
 gmailAppPassword = os.environ.get('gmailAppPassword')
 #Add or remove watch objects, there is no limit.
 watches = [
-    {'watchName': 'Omega Seamaster 2531.80', 'minPrice' : 900, 'maxPrice': 2700,  'recentListingsLimit': 13},
-    {'watchName': 'Tudor Black Bay 58', 'minPrice' : 900, 'maxPrice': 2700,  'recentListingsLimit': 13},
-    {'watchName': 'Omega Speedmaster', 'minPrice' : 1000, 'maxPrice': 2000,  'recentListingsLimit': 13},
+    {'watchName': 'Omega Seamaster 2531.80', 'minPrice' : 900, 'maxPrice': 2500,  'recentListingsLimit': 13},
+    {'watchName': 'Tudor Black Bay 58', 'minPrice' : 900, 'maxPrice': 2000,  'recentListingsLimit': 13},
+    {'watchName': 'Omega Speedmaster', 'minPrice' : 1000, 'maxPrice': 3000,  'recentListingsLimit': 13},
     ] 
+frequencyOfChecks = 1 #In days, so this checks every 24 hours.
 
 #Don't need to use an API for this, no point honestly, I don't need exact prices and watch prices fluctuate much more than forex
 #honestly
@@ -71,7 +73,7 @@ def send_mail(watchName, maxPrice, URL):
     server.login(emailAddress, gmailAppPassword)
 
     subject = 'The price of {} has fallen below {}'.format(watchName, maxPrice)
-    body = "There has been a listing below your ideal price, so check out the URL QUICK URL: {}".format(URL)
+    body = "There has been a listing below your ideal price, so check out the URL: {}".format(URL)
     msg = f"Subject:{subject}\n\n{body}"
 
     server.sendmail(
@@ -81,8 +83,13 @@ def send_mail(watchName, maxPrice, URL):
     )
     print("EMAIL HAS BEEN SENT!")
 
+    server.quit()
+
 def searchForWatches():
     for watch in watches:
         scrapeWatchCharts(watch['watchName'],watch['minPrice'],watch['maxPrice'],watch['recentListingsLimit'])
 
-searchForWatches()
+while(True):
+    searchForWatches()
+    #Checks once a frequencyOfChecks days
+    time.sleep(60*60*24*frequencyOfChecks)
