@@ -1,3 +1,6 @@
+Purpose:
+This script scrapes prices from https://watchcharts.com/ for the models you select and will send an email to notify you when there is a listing in your budget.
+
 STEPS to use:
 
 Fill up the form at the beginning of the script with your User Info and the watches you are looking for and at given price points (prices are in SGD by default)
