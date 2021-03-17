@@ -1,6 +1,6 @@
 STEPS to use:
 
-Fill up the form at the beginning of the script, with your User Info and the watches you are looking for.
+Fill up the form at the beginning of the script with your User Info and the watches you are looking for and at given price points (prices are in SGD by default)
 The gmail App password is not your gmail password, but is the app Password Google generates for you for a specific app.
 
 The script has a frequencyOfChecks variable that you can set, the default is 1, meaning it will run every 24 hrs. 
