@@ -12,7 +12,7 @@ gmailAppPassword = os.environ.get('gmailAppPassword')
 watches = [
     {'watchName': 'Omega Seamaster 2531.80', 'minPrice' : 900, 'maxPrice': 2300,  'recentListingsLimit': 13},
     {'watchName': 'Tudor Black Bay 58', 'minPrice' : 900, 'maxPrice': 2500,  'recentListingsLimit': 13},
-    {'watchName': 'Omega Speedmaster Reduced', 'minPrice' : 1000, 'maxPrice': 2300,  'recentListingsLimit': 13},
+    {'watchName': 'Omega Speedmaster Reduced', 'minPrice' : 1000, 'maxPrice': 2700,  'recentListingsLimit': 13},
     ] 
 frequencyOfChecks = 0 #In days, so if 1, it checks every day.
 
@@ -40,12 +40,16 @@ def scrapeWatchCharts(watchName, minPrice, maxPrice, recentListingsLimit):
 
     count = 0
     for price in prices:
-        if price[0] == '$':
+        if "N/A" in price: #Skips it if price is N/A
+            continue
+        elif price[0] == '$':
             convertedPrice = int(price[1:].replace(',', '')) * USD_TO_SGD
         elif price[0] == '€':
             convertedPrice = int(price[1:].replace(',', '')) * EUR_TO_SGD
         elif price[0] == '£':
             convertedPrice = int(price[1:].replace(',', '')) * GBP_TO_SGD
+        else: #Also skips te watch if watchCharts adds a new Currency or smth
+            continue
 
         #rounding one more time after forex conversion
         convertedPrice = round(convertedPrice)
