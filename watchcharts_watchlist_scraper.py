@@ -10,11 +10,11 @@ emailAddressRecipient = os.environ.get('emailAddress')
 gmailAppPassword = os.environ.get('gmailAppPassword')
 #Add or remove watch objects, there is no limit.
 watches = [
-    {'watchName': 'Omega Seamaster 2531.80', 'minPrice' : 900, 'maxPrice': 2500,  'recentListingsLimit': 13},
-    {'watchName': 'Tudor Black Bay 58', 'minPrice' : 900, 'maxPrice': 2000,  'recentListingsLimit': 13},
-    {'watchName': 'Omega Speedmaster', 'minPrice' : 1000, 'maxPrice': 3000,  'recentListingsLimit': 13},
+    {'watchName': 'Omega Seamaster 2531.80', 'minPrice' : 900, 'maxPrice': 2300,  'recentListingsLimit': 13},
+    {'watchName': 'Tudor Black Bay 58', 'minPrice' : 900, 'maxPrice': 2500,  'recentListingsLimit': 13},
+    {'watchName': 'Omega Speedmaster Reduced', 'minPrice' : 1000, 'maxPrice': 2300,  'recentListingsLimit': 13},
     ] 
-frequencyOfChecks = 1 #In days, so this checks every 24 hours.
+frequencyOfChecks = 0 #In days, so if 1, it checks every day.
 
 #Don't need to use an API for this, no point honestly, I don't need exact prices and watch prices fluctuate much more than forex
 #honestly
